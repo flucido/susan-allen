@@ -58,9 +58,11 @@ squarespace-export/
 coverage/
 .nyc_output/
 
-# OS screenshots that aren't deliverables
+# OS auto-saved screenshots (Desktop, etc.) — not our mockup screenshots
+Screenshot [0-9]*.png
+Screen Shot *.png
+IMG_[0-9]*.png
 *-screenshot-temp.png
-Screenshot*.png
 
 # Allow these even in the broader ignore:
 !.gitkeep
