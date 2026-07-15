@@ -18,10 +18,25 @@
 susan-allen/
 ├── README.md                         # this file
 ├── .gitignore                        # standard ignore for design repos
-├── docs/                             # design process + decisions
-│   ├── kick-off-summary.md           # 1-pager Frank sends Susan 7/15 AM
-│   ├── post-meeting-feedback.md      # succinct feedback from call + transcript
-│   └── framework-decision.md         # OKF vs aesthetic-triad (Frank decision)
+├── docs/                             # project documents + design process
+│   ├── README.md                     # index of all project docs
+│   ├── dossier.md                    # engagement source of truth (mirrored)
+│   ├── sow.md                        # signed SOW (mirrored)
+│   ├── discovery-prep.md              # 6/30 discovery call prep
+│   ├── kickoff-agenda.md             # pre-kick-off agenda (SUPERSEDED, historical)
+│   ├── kickoff-invite.md             # calendar invite sent 7/13
+│   ├── kickoff-notes.md               # PRIMARY 7/14 meeting notes
+│   ├── kickoff-summary.md             # 1-pager template for Susan 7/15 AM
+│   ├── followup-2026-07-06.md        # SOW handoff email
+│   ├── followup-2026-07-07.md        # revised SOW + Phase 2 + kick-off invite
+│   ├── post-meeting-feedback.md      # succinct feedback (call + transcript)
+│   ├── mockup-work-plan.md           # per-template to-do
+│   ├── audit-readme.md               # 6-gate framework overview
+│   ├── audit-current-site.md         # susanallentherapy.com audit
+│   ├── audit-template-shortlist.md   # 4-candidate shortlist (working set: 3)
+│   ├── audit-template-audits.md       # 6-gate per-template audit
+│   ├── audit-comparison.md           # matrix + recommendation
+│   └── audit-screenshots/             # current site + templates (17 PNGs)
 ├── design-system/                    # WFC tokens + Susan-specific variants
 │   ├── README.md                     # design system exploration overview
 │   ├── tokens-susan-cool.yaml        # leading palette (slate blue + sage + cream)
