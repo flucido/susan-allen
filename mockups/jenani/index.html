@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susan Allen, LMFT — Therapy for the reproductive + perinatal journey</title>
+<meta name="description" content="Susan Allen, LMFT provides therapy for reproductive, perinatal, and maternal mental health in San Francisco, Marin, and across California via telehealth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #ecf3f8;
+  --bg-secondary: #dfe9f1;
+  --bg-tertiary: #cedde8;
+  --text-primary: #1a262e;
+  --text-secondary: #4f5a61;
+  --text-tertiary: #6a737a;
+  --border-subtle: #cad6df;
+  --border-medium: #9fadb8;
+  --accent-primary: #186a99;
+  --accent-hover: #005581;
+  --accent-focus: #004269;
+  --accent-secondary: #56809d;
+  --accent-soft: rgba(24, 106, 153, 0.12);
+  --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-body: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+  --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+  --space-5: 48px; --space-6: 64px; --space-7: 96px; --space-8: 128px;
+  --duration-fast: 150ms; --duration-normal: 250ms; --easing-default: ease-out;
+  --nav-height: 68px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--accent-primary);
+  color: #fff;
+  padding: var(--space-2) var(--space-3);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 0 0 6px 0;
+  transition: top var(--duration-fast) var(--easing-default);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: sticky;
+  top: 0;
+  height: var(--nav-height);
+  z-index: 100;
+  background: rgba(236, 243, 248, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+}
+.nav-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.nav-wordmark {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.nav-wordmark .lmft {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color var(--duration-fast) var(--easing-default);
+}
+.nav-links a:hover { color: var(--accent-primary); }
+.nav-links a:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 4px; }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--easing-default);
+}
+.nav-cta:hover { background: var(--accent-hover); }
+.nav-cta:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; }
+.nav-toggle { display: none; }
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-3);
+    gap: var(--space-2);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 10px 0; font-size: 16px; }
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+  }
+  .nav-cta { display: none; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: var(--space-8) var(--space-4) var(--space-7);
+  text-align: center;
+  position: relative;
+}
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+.hero-lede {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: var(--space-5);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--easing-default), transform var(--duration-fast) var(--easing-default);
+}
+.hero-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.hero-cta:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; }
+
+/* Biophilic hero image — soft olive branch accent */
+.hero-image {
+  position: absolute;
+  right: -40px;
+  top: 20px;
+  width: 280px;
+  height: 380px;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0.35;
+  z-index: 0;
+}
+.hero-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.4) hue-rotate(180deg) brightness(1.05);
+}
+.hero-image::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--accent-primary); mix-blend-mode: multiply; opacity: 0.15;
+}
+@media (max-width: 900px) { .hero-image { display: none; } }
+
+/* ============ SECTION HEADERS ============ */
+.section {
+  padding: var(--space-7) var(--space-4);
+}
+.section-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-1);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+/* ============ ABOUT ============ */
+.about {
+  background: var(--bg-secondary);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+.about-headshot {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-headshot .headshot-placeholder {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-family: var(--font-display);
+  font-size: 17px;
+  padding: var(--space-3);
+}
+.about-headshot .headshot-placeholder span {
+  display: block;
+  font-size: 13px;
+  font-family: var(--font-body);
+  margin-top: var(--space-1);
+}
+.about-bio p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  line-height: 1.7;
+}
+.about-bio p:first-child {
+  font-size: 20px;
+  color: var(--text-primary);
+}
+.credentials {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.credentials-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-2);
+}
+.credentials-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.credentials-list li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding-left: var(--space-2);
+  position: relative;
+}
+.credentials-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .about-headshot { max-width: 320px; margin: 0 auto; }
+  .credentials-list { grid-template-columns: 1fr; }
+}
+
+/* ============ PILLARS ============ */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.pillar-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: var(--space-4);
+  transition: border-color var(--duration-normal) var(--easing-default), box-shadow var(--duration-normal) var(--easing-default);
+}
+.pillar-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 24px rgba(31, 42, 48, 0.06);
+}
+.pillar-number {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-style: italic;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-2);
+}
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  line-height: 1.2;
+}
+.pillar-body {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+/* ============ SPECIALTIES ============ */
+.specialties {
+  background: var(--bg-secondary);
+}
+.specialties-lead {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.specialty-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: border-color var(--duration-normal) var(--easing-default);
+}
+.specialty-card:hover { border-color: var(--accent-primary); }
+.specialty-card:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+.specialty-card .specialty-icon {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-2);
+}
+.specialty-card .specialty-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+  line-height: 1.2;
+}
+.specialty-card .specialty-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.specialties-rest {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+.specialty-chip {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: var(--space-2) var(--space-3);
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-align: center;
+  transition: border-color var(--duration-fast) var(--easing-default), background var(--duration-fast) var(--easing-default);
+}
+.specialty-chip:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-soft);
+}
+.see-all {
+  text-align: center;
+}
+.see-all a {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-primary);
+  padding-bottom: 2px;
+}
+.see-all a:hover { color: var(--accent-hover); border-color: var(--accent-hover); }
+
+@media (max-width: 768px) {
+  .specialties-lead { grid-template-columns: 1fr; }
+  .specialties-rest { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) { .specialties-rest { grid-template-columns: 1fr; } }
+
+/* ============ FAQ — visual centerpiece ============ */
+.faq {
+  background: var(--bg-primary);
+  padding: var(--space-8) var(--space-4);
+}
+.faq .section-inner { max-width: 880px; }
+.faq .section-label { font-size: 20px; }
+.faq .section-title { font-size: clamp(36px, 5vw, 52px); }
+.faq-intro {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin-bottom: var(--space-6);
+}
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--duration-fast) var(--easing-default);
+}
+.faq-item:first-child { border-top: 1px solid var(--border-subtle); }
+.faq-item:hover { background: var(--accent-soft); }
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color var(--duration-fast) var(--easing-default);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--accent-primary); }
+.faq-item summary:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 4px; }
+.faq-item .faq-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--accent-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  transition: transform var(--duration-normal) var(--easing-default), background var(--duration-normal) var(--easing-default), border-color var(--duration-normal) var(--easing-default);
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: var(--accent-primary);
+}
+.faq-item[open] summary { color: var(--accent-primary); }
+.faq-answer {
+  padding: 0 var(--space-3) var(--space-5);
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 62ch;
+}
+.faq-answer a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.faq-answer a:hover { color: var(--accent-hover); }
+
+/* ============ FINAL CTA ============ */
+.final-cta {
+  background: var(--bg-tertiary);
+  text-align: center;
+}
+.final-cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.final-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+.final-cta p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  line-height: 1.6;
+}
+.final-cta .cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--easing-default);
+}
+.final-cta .cta-button:hover { background: var(--accent-hover); }
+.final-cta .cta-button:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; }
+.final-cta .cta-secondary {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: 15px;
+  color: var(--text-tertiary);
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--bg-secondary);
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+.footer-brand .footer-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+.footer-brand .footer-tagline {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+.footer-col h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-2);
+  font-weight: 400;
+}
+.footer-col p, .footer-col a {
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.footer-col a:hover { color: var(--accent-primary); }
+.footer-col a:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+
+.hipaa-notice {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.hipaa-notice p {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.55;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.footer-bottom p {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.footer-nav-bottom {
+  display: flex;
+  gap: var(--space-3);
+}
+.footer-nav-bottom a {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--easing-default);
+}
+.footer-nav-bottom a:hover { color: var(--accent-primary); }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .footer-bottom { flex-direction: column; gap: var(--space-2); text-align: center; }
+  .footer-nav-bottom { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ============ PREFERS-REDUCED-MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#home" class="nav-wordmark" data-od-id="nav-wordmark">Susan Allen, LMFT <span class="lmft">#51679</span></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About me</a></li>
+      <li><a href="#specialties">My specialties</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="mailto:SusanAllenLMFT@gmail.com" class="nav-cta" data-od-id="nav-email-cta">Email Susan</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section id="home" class="hero" aria-labelledby="hero-h1">
+  <div class="hero-image" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&auto=format&fit=crop&q=80" alt="" loading="lazy" />
+  </div>
+  <div class="hero-inner">
+    <h1 id="hero-h1" data-od-id="hero-headline">There are many ways to have a family. There are many ways to parent.</h1>
+    <p class="hero-lede">There are many twists and turns along the way. I'm here to support you on your path to parenthood and beyond. I am a licensed marriage and family therapist with specialized training in reproductive and perinatal mental health and family building.</p>
+    <div class="hero-meta" style="margin-top:var(--space-4);font-size:0.85rem;color:var(--text-tertiary);display:flex;gap:var(--space-2);justify-content:center;flex-wrap:wrap;font-variant-numeric:tabular-nums;">
+      <span>LMFT #51679</span><span>·</span><span>San Francisco &amp; Marin</span><span>·</span><span>Telehealth across California</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section about" aria-labelledby="about-title">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-headshot" data-od-id="about-headshot">
+        <div class="headshot-placeholder">
+          Susan Allen, LMFT
+          <span>Headshot placement</span>
+        </div>
+      </div>
+      <div class="about-bio" data-od-id="about-bio">
+        <p class="section-label">My Practice</p>
+        <h2 class="section-title" id="about-title">Women's reproductive, perinatal and maternal mental health</h2>
+        <p>My practice focus is women's reproductive, perinatal and maternal mental health. I provide individual therapy for infertility, pregnancy and postpartum, third-party family building, women at mid-life, and parenting kids of any age in any family structure. I also work with donor conceived individuals, and with former donors who want to meaningfully connect with genetic offspring.</p>
+        <p>My general practice areas include loss and grief, life transitions, understanding and managing mood and anxiety challenges, sandwich generation stress, and relationship issues. I work with clients in the San Francisco Bay Area.</p>
+        <p>I believe strongly in the inner wisdom within each of us; at times we just need additional support. Working from a relational approach, I encourage genuine connection and collaboration between us. My clinical style integrates mindfulness-based cognitive therapy with relational and psychodynamic theories. I love the transformational nature of this work and believe in our capacity for change and growth. Therapy can be an enriching experience that brings about lasting change. I encourage you to reach out for support.</p>
+        <div class="credentials">
+          <p class="credentials-label">Education, Affiliations &amp; Training</p>
+          <ul class="credentials-list">
+            <li>Licensed Marriage &amp; Family Therapist | LMFT 51679 | State of California</li>
+            <li>M.A. Counseling Psychology, University of San Francisco</li>
+            <li>American Society for Reproductive Medicine, Mental Health Professional Group</li>
+            <li>Donor Conceived Community, Professional Group</li>
+            <li>Postpartum Support International, Professional Provider</li>
+            <li>Postgraduate training: Infertility and Third Party Reproduction (ASRM); Maternal Mental Health / Perinatal Mood and Anxiety Disorders (PSI / 2020 Mom)</li>
+          </ul>
+          <a href="https://therapists.psychologytoday.com/rms/prof_detail.php?profid=72521" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:var(--space-3);padding:8px 14px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border-medium);font-size:13px;font-weight:700;color:var(--text-secondary);text-decoration:none;transition:border-color 150ms ease-out;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent-primary);"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" stroke-linecap="round"/></svg>
+            Psychology Today Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="section pillars" aria-labelledby="pillars-title">
+  <div class="section-inner">
+    <p class="section-label">Therapy Process</p>
+    <h2 class="section-title" id="pillars-title" style="margin-bottom: var(--space-5);">Developing a deeper understanding of ourselves</h2>
+    <p style="font-size:18px;color:var(--text-secondary);max-width:680px;margin-bottom:var(--space-6);line-height:1.7;">Therapy involves examining our lives to develop a deeper understanding of ourselves and what holds us back from change. My role is to encourage self-awareness and help create a conscious shift toward positive changes in your life. Together we will explore patterns that may be impacting your life and relationships so you can see beyond limitations and experience more balance and connection. It is my hope that our work together will support you in feeling less stressed and more optimistic about what you can bring to your life.</p>
+    <div class="pillars-grid" data-od-id="pillars-grid">
+      <article class="pillar-card">
+        <h3 class="pillar-title">Mindfulness-based CBT</h3>
+        <p class="pillar-body">My clinical style integrates mindfulness-based cognitive therapy with relational and psychodynamic theories.</p>
+      </article>
+      <article class="pillar-card">
+        <h3 class="pillar-title">Relational Approach</h3>
+        <p class="pillar-body">Working from a relational approach, I encourage genuine connection and collaboration between us.</p>
+      </article>
+      <article class="pillar-card">
+        <h3 class="pillar-title">Inner Wisdom</h3>
+        <p class="pillar-body">I believe strongly in the inner wisdom within each of us; at times we just need additional support.</p>
+      </article>
+      <article class="pillar-card">
+        <h3 class="pillar-title">Capacity for Change</h3>
+        <p class="pillar-body">I love the transformational nature of this work and believe in our capacity for change and growth. Therapy can be an enriching experience that brings about lasting change.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECIALTIES ============ -->
+<section id="specialties" class="section specialties" aria-labelledby="specialties-title">
+  <div class="section-inner">
+    <p class="section-label">Practice Focus</p>
+    <h2 class="section-title" id="specialties-title">There are many life changes during the reproductive years</h2>
+    <p style="font-size:17px;color:var(--text-secondary);max-width:620px;margin-bottom:var(--space-5);">That impact one's psychological / emotional health, identity and relationships. My practice focuses on maternal and reproductive mental health, new parenthood and parenting across the lifespan.</p>
+    <div class="specialties-lead" data-od-id="specialties-lead" style="margin-bottom: var(--space-4);">
+      <div class="specialty-card">
+        <div class="specialty-name">Infertility and Reproductive Health</div>
+        <div class="specialty-desc">Coping with the stress of infertility, impact on relationships, exploring treatment options, support through IUI/IVF, secondary infertility, cancer in young women and fertility preservation, childfree decision-making, peri/menopause transition.</div>
+      </div>
+      <div class="specialty-card">
+        <div class="specialty-name">Pregnancy and Postpartum</div>
+        <div class="specialty-desc">Decision-making around having children, pregnancy emotional health, high risk pregnancy, postpartum anxiety and depression, TFMR decision-making, pregnancy loss, birth trauma, preterm birth / NICU stays, new parent self-care, parenting kids.</div>
+      </div>
+      <div class="specialty-card">
+        <div class="specialty-name">Family Building with the Help of a Donor</div>
+        <div class="specialty-desc">Third party family building via donor egg, sperm or embryo, or gestational carrier. Talking openly with children about donor conception, creating / sharing your family story, genetic relatedness, support for donor conceived individuals.</div>
+      </div>
+      <div class="specialty-card">
+        <div class="specialty-name">General Practice</div>
+        <div class="specialty-desc">Loss and grief, life transitions, understanding and managing mood and anxiety challenges, sandwich generation stress, relationship issues.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section faq" aria-labelledby="faq-title">
+  <div class="section-inner">
+    <p class="section-label">Logistics &amp; Finances</p>
+    <h2 class="section-title" id="faq-title">Working together</h2>
+    <p class="faq-intro" data-od-id="faq-intro">Please contact me to discuss my current fee and availability. Payment is due at each session, payable by electronic payment.</p>
+    <div class="faq-list" data-od-id="faq-list">
+      <details class="faq-item" open>
+        <summary>
+          <span>Do you accept insurance?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>My practice is self-pay. I am an out of network provider. I do not work directly with any insurance carriers. For those with a PPO plan, you may be eligible to receive a partial reimbursement depending on your plan's out of network benefit. Please contact your provider.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span>What is your cancellation policy?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Appointment cancellations made with less than 24 hours advance notice will result in a full session fee charge.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span>Do you do RE-required intended-parent consultations?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>No. If your RE referred you for a required intended parent psychoeducational consultation meeting, I don't offer those meetings. I provide ongoing psychotherapy and reproductive counseling. Please refer back to your clinic.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span>Are you licensed in California?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>I am licensed in California and only work with California-based clients. For information related to Good Faith Estimate of treatment costs, please see Notice of Right to Receive Good Faith Estimate.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span>Telehealth or in person?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Both. In-person sessions in San Francisco and Marin; telehealth across California.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="contact" class="section final-cta" aria-labelledby="final-cta-title">
+  <div class="final-cta-inner" data-od-id="final-cta">
+    <h2 id="final-cta-title">Contact</h2>
+    <p>Please contact me to set up an initial phone consultation. Please note: I am licensed in California and work with California-based clients. If you are a former client of mine, please get in touch.</p>
+    <span class="cta-secondary" style="font-variant-numeric:tabular-nums;">Susan Allen, LMFT &middot; 415-505-3541 &middot; SusanAllenLMFT@gmail.com<br>San Francisco and Marin | In-person and Telehealth in California</span>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-name">Susan Allen, LMFT</p>
+        <p class="footer-tagline">San Francisco Marin Bay Area Psychotherapy | Infertility, Family Building, Pregnancy, Postpartum, Women's Health.<br>Licensed Marriage &amp; Family Therapist LMFT 51679.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p><a href="mailto:SusanAllenLMFT@gmail.com">SusanAllenLMFT@gmail.com</a></p>
+        <p>415-505-3541</p>
+        <p>susanallentherapy.com</p>
+      </div>
+      <div class="footer-col">
+        <h3>Site</h3>
+        <p><a href="#home">Home</a></p>
+        <p><a href="#about">About</a></p>
+        <p><a href="#specialties">Focus</a></p>
+        <p><a href="#faq">FAQ</a></p>
+        <p><a href="#contact">Contact</a></p>
+      </div>
+    </div>
+    <div class="hipaa-notice" data-od-id="hipaa-notice">
+      <p><strong>HIPAA &amp; crisis notice:</strong> This site does not provide medical advice and is not a crisis service. Email is not a secure channel; please do not include protected health information in your message. For emergencies, call 988 or 911.</p>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Susan Allen LMFT | All Rights Reserved.</p>
+      <nav class="footer-nav-bottom" aria-label="Footer navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#specialties">Focus</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function() {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+</body>
+</html>

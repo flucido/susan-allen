@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Susan Allen — Site Refresh Plan (July 2026)</title>
+  <meta name="description" content="Audit findings, kick-off recap, and template recommendations for Susan Allen, LMFT — prepared by WellFull Collective, July 15 2026." />
+  <style>
+    :root {
+      --bg-primary: #F2F0EC;
+      --bg-secondary: #E6E2DC;
+      --bg-tertiary: #D9D5CE;
+      --text-primary: #1F2A30;
+      --text-secondary: #4A565C;
+      --text-tertiary: #7A8590;
+      --border-subtle: #D5CFC6;
+      --accent-primary: #5A7A8A;
+      --accent-hover: #4A6A7A;
+      --accent-focus: #3A5A6A;
+      --accent-secondary: #7A9A8A;
+      --accent-soft: rgba(90, 122, 138, 0.10);
+
+      --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+      --font-body: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 48px;
+      --space-6: 64px;
+      --space-7: 96px;
+      --space-8: 128px;
+
+      --duration-fast: 150ms;
+      --easing-default: ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    h1 { font-size: clamp(40px, 6vw, 64px); }
+    h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: var(--space-2); }
+    h3 { font-size: 24px; margin-bottom: var(--space-1); }
+    h4 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
+    p { color: var(--text-secondary); max-width: 65ch; }
+    a { color: var(--accent-primary); text-decoration: none; transition: color var(--duration-fast) var(--easing-default); }
+    a:hover { color: var(--accent-hover); }
+    a:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; border-radius: 2px; }
+
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      padding: var(--space-1) var(--space-2);
+      background: var(--accent-primary); color: white; z-index: 1000;
+    }
+    .skip-link:focus { top: 0; }
+
+    .container { max-width: 920px; margin: 0 auto; padding: 0 var(--space-4); }
+
+    /* Cover */
+    header.cover {
+      padding: var(--space-8) var(--space-4) var(--space-7);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .cover .eyebrow {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      color: var(--accent-primary); margin-bottom: var(--space-3);
+    }
+    .cover h1 { margin-bottom: var(--space-3); max-width: 16ch; }
+    .cover .lede { font-size: 20px; color: var(--text-secondary); max-width: 55ch; margin-bottom: var(--space-5); }
+    .cover-meta { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: 14px; color: var(--text-tertiary); }
+    .cover-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .cover-meta span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-secondary); display: inline-block; }
+
+    /* Section */
+    section { padding: var(--space-7) var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--accent-primary); margin-bottom: var(--space-2);
+    }
+
+    /* Audit summary cards */
+    .gate-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-2); margin-top: var(--space-4);
+    }
+    .gate-card {
+      padding: var(--space-3);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+    }
+    .gate-card .gate-name { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .gate-card .gate-result { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .gate-card .gate-result.pass { color: #4A6A5A; }
+    .gate-card .gate-result.fail { color: #8A4A4A; }
+    .gate-card .gate-result.mixed { color: #8A6A4A; }
+    .gate-card .gate-note { font-size: 13px; color: var(--text-tertiary); line-height: 1.5; }
+
+    /* Issue list */
+    .issue-list { list-style: none; margin-top: var(--space-3); }
+    .issue-list li {
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: grid; grid-template-columns: auto 1fr; gap: var(--space-3);
+    }
+    .issue-list li:last-child { border-bottom: none; }
+    .severity {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 10px; border-radius: 2px; white-space: nowrap; align-self: start; margin-top: 2px;
+    }
+    .severity.high { background: rgba(138, 74, 74, 0.12); color: #8A4A4A; }
+    .severity.medium { background: rgba(138, 106, 74, 0.12); color: #8A6A4A; }
+    .severity.low { background: rgba(74, 106, 90, 0.12); color: #4A6A5A; }
+    .issue-text { font-size: 15px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* Mockup cards */
+    .mockup-grid {
+      display: grid; grid-template-columns: 1fr; gap: var(--space-3); margin-top: var(--space-4);
+    }
+    @media (min-width: 720px) {
+      .mockup-grid { grid-template-columns: 1fr; }
+    }
+    .mockup-card {
+      padding: var(--space-4);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent-primary);
+    }
+    .mockup-card.primary { border-left-color: var(--accent-secondary); background: var(--bg-tertiary); }
+    .mockup-card .mockup-tag {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent-primary); margin-bottom: var(--space-1);
+    }
+    .mockup-card.primary .mockup-tag { color: var(--accent-secondary); }
+    .mockup-card h3 { font-size: 28px; margin-bottom: 8px; }
+    .mockup-card .mockup-why { font-size: 15px; color: var(--text-secondary); margin-bottom: var(--space-2); line-height: 1.55; }
+    .mockup-card .mockup-link {
+      display: inline-block; margin-top: var(--space-2);
+      padding: 10px 18px; background: var(--accent-primary); color: white;
+      border-radius: 3px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      transition: background var(--duration-fast) var(--easing-default);
+    }
+    .mockup-card .mockup-link:hover { background: var(--accent-hover); color: white; }
+    .mockup-card .mockup-traits { font-size: 13px; color: var(--text-tertiary); margin-top: var(--space-2); }
+
+    /* Recap callout */
+    .recap-callout {
+      padding: var(--space-4); background: var(--accent-soft);
+      border-left: 3px solid var(--accent-primary); border-radius: 0 4px 4px 0;
+      margin: var(--space-3) 0;
+    }
+    .recap-callout p { color: var(--text-primary); font-size: 16px; }
+
+    /* Timeline table */
+    table.timeline {
+      width: 100%; border-collapse: collapse; margin-top: var(--space-3); font-size: 14px;
+    }
+    table.timeline th, table.timeline td {
+      text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle);
+    }
+    table.timeline th { font-weight: 700; color: var(--text-tertiary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+    table.timeline td { color: var(--text-secondary); }
+    table.timeline tr:last-child td { border-bottom: none; }
+
+    /* Your todos */
+    .todo-list { list-style: none; margin-top: var(--space-3); }
+    .todo-list li {
+      padding: var(--space-2) 0 var(--space-2) var(--space-4);
+      position: relative; font-size: 15px; color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .todo-list li:last-child { border-bottom: none; }
+    .todo-list li::before {
+      content: ""; position: absolute; left: 0; top: 18px;
+      width: 14px; height: 14px; border: 2px solid var(--accent-primary); border-radius: 3px;
+    }
+
+    /* Footer */
+    footer {
+      padding: var(--space-6) var(--space-4); background: var(--text-primary); color: rgba(255,255,255,0.85);
+    }
+    footer .container { max-width: 920px; }
+    footer h4 { color: rgba(255,255,255,0.95); margin-bottom: var(--space-2); }
+    footer p { color: rgba(255,255,255,0.65); font-size: 14px; }
+    footer .contact-block { margin-bottom: var(--space-3); }
+    footer a { color: var(--accent-secondary); }
+    footer .hipaa-notice {
+      margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; max-width: 65ch;
+    }
+
+    .intro-nav {
+      display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4);
+      font-size: 13px;
+    }
+    .intro-nav a {
+      padding: 6px 14px; border: 1px solid var(--border-subtle); border-radius: 20px;
+      color: var(--text-secondary); background: var(--bg-secondary);
+    }
+    .intro-nav a:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="cover">
+    <div class="container">
+      <div class="eyebrow">WellFull Collective · Site Refresh Plan</div>
+      <h1>Your site, refreshed.</h1>
+      <p class="lede">A summary of what we found in your current site, what we discussed at kick-off, and three template mockups built with your content so you can pick a direction.</p>
+      <div class="cover-meta">
+        <span>Prepared for Susan Allen, LMFT</span>
+        <span>July 15, 2026</span>
+        <span>From Frank Lucido</span>
+      </div>
+      <nav class="intro-nav" aria-label="Document sections">
+        <a href="#audit">Audit findings</a>
+        <a href="#recap">Yesterday's conversation</a>
+        <a href="#templates">Three template mockups</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#todos">Your to-dos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="audit">
+      <div class="container">
+        <div class="section-label">Part 1</div>
+        <h2>What we found in your current site</h2>
+        <p>We walked susanallentherapy.com through the WFC 6-gate framework — the same checklist we use on every build. Your site is functional and the photography is professional, but two things are actively working against you.</p>
+
+        <div class="gate-grid">
+          <div class="gate-card">
+            <div class="gate-name">Element count</div>
+            <div class="gate-result fail">High fail</div>
+            <div class="gate-note">About page has 25+ elements; Focus page 30+. Above the 9–17 range where anxious users stay oriented.</div>
+          </div>
+          <div class="gate-card">
+            <div class="gate-name">Arousal calibration</div>
+            <div class="gate-result mixed">Medium</div>
+            <div class="gate-note">ALL CAPS H1 reads institutional, not warm. Inconsistent hierarchy.</div>
+          </div>
+          <div class="gate-card">
+            <div class="gate-name">Implicit aesthetic</div>
+            <div class="gate-result fail">High fail</div>
+            <div class="gate-note">H1 is your brand name, not the page content. Users scan for "what do you treat," not "who are you."</div>
+          </div>
+          <div class="gate-card">
+            <div class="gate-name">Accessibility</div>
+            <div class="gate-result mixed">Needs a pass</div>
+            <div class="gate-note">Color contrast fails WCAG AA. Affects SEO + AI findability, not just screen readers.</div>
+          </div>
+          <div class="gate-card">
+            <div class="gate-name">Dominance</div>
+            <div class="gate-result pass">Pass</div>
+            <div class="gate-note">No urgency cues, no pressure. Good — we'll preserve this.</div>
+          </div>
+          <div class="gate-card">
+            <div class="gate-name">Revisability</div>
+            <div class="gate-result pass">N/A</div>
+            <div class="gate-note">No forms (email intake). We'll keep it that way per your HIPAA workflow.</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">The three things we'll fix first</h3>
+        <ul class="issue-list">
+          <li>
+            <span class="severity high">High</span>
+            <span class="issue-text"><strong>Services page silently redirects to home.</strong> Worse than a 404 — users don't know they didn't get the page. We'll rebuild this as your Specialties page.</span>
+          </li>
+          <li>
+            <span class="severity high">High</span>
+            <span class="issue-text"><strong>H1 is your brand on every page.</strong> "SUSAN ALLEN LMFT | PSYCHOTHERAPY" doesn't tell a visitor what you treat. We'll make every H1 about the page content.</span>
+          </li>
+          <li>
+            <span class="severity medium">Medium</span>
+            <span class="issue-text"><strong>Color contrast fails WCAG AA.</strong> Affects whether AI chatbots can surface your site in results — not just a screen-reader concern.</span>
+          </li>
+          <li>
+            <span class="severity low">Quick win</span>
+            <span class="issue-text"><strong>ALL CAPS H1 + footer alignment.</strong> Small visual fixes that shift the feel from institutional to warm.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="recap">
+      <div class="container">
+        <div class="section-label">Part 2</div>
+        <h2>What we covered yesterday</h2>
+        <p>Our kick-off call on July 14 — 57 minutes on Zoom. Thank you for the Squarespace admin access on the call, and for sharing what you did.</p>
+
+        <div class="recap-callout">
+          <p>You said it clearly: <em>"I just like really beautiful, minimal things, and I would like my site to reflect that."</em> That's the brief. Everything below is in service of it.</p>
+        </div>
+
+        <h3 style="margin-top: 32px; margin-bottom: 12px;">Your goals, in your words</h3>
+        <ul class="issue-list">
+          <li><span class="severity low">1</span><span class="issue-text">Update + streamline — 8-year-old site, needs to work on mobile.</span></li>
+          <li><span class="severity low">2</span><span class="issue-text">Stop the bot spam — hundreds of emails a day from China, Iran, Afghanistan.</span></li>
+          <li><span class="severity low">3</span><span class="issue-text">Clean up the code — old + new jammed together.</span></li>
+          <li><span class="severity low">4</span><span class="issue-text">Reflect your aesthetic — beautiful, minimal.</span></li>
+          <li><span class="severity low">5</span><span class="issue-text">Get found in generative search — you used to rank top, now nowhere.</span></li>
+          <li><span class="severity low">6</span><span class="issue-text">Honor the seriousness of the work.</span></li>
+        </ul>
+
+        <h3 style="margin-top: 32px; margin-bottom: 12px;">What we decided</h3>
+        <ul class="issue-list">
+          <li><span class="severity low">Color</span><span class="issue-text">Cool / blue over warm / orange. We're going slate blue + sage, not the peachy default.</span></li>
+          <li><span class="severity low">Contact</span><span class="issue-text">Email only — no booking forms, no scheduling widgets. Keeps intake personal and HIPAA-aware.</span></li>
+          <li><span class="severity low">Platform</span><span class="issue-text">Stay on Squarespace. No migration.</span></li>
+          <li><span class="severity low">Timeline</span><span class="issue-text">Phase 1 wraps ~August 22 (revised to absorb the WFC Japan trip July 22 – Aug 2).</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="templates">
+      <div class="container">
+        <div class="section-label">Part 3</div>
+        <h2>Three template mockups — built with your content</h2>
+        <p>These aren't the Squarespace template demos. We took three templates that fit "warm, specialty health practice" and rebuilt each one with your actual content, your specialties, your credentials, and your contact info — so you can see how <em>your site</em> would feel in each direction. Click any one to open it.</p>
+
+        <div class="mockup-grid">
+          <div class="mockup-card primary">
+            <div class="mockup-tag">Primary recommendation</div>
+            <h3>Clove — the mental-health template</h3>
+            <p class="mockup-why">Built for mental health practices. The team-page pattern surfaces your ASRM + PSI credentials prominently — your single biggest differentiator. Calm, structured, clinical-but-warm. Needs a small copy pass to sound like a solo practitioner rather than a collective.</p>
+            <p class="mockup-traits">Best for: credential prominence · specialty structure · testimonial pattern</p>
+            <a class="mockup-link" href="../mockups/clove/index.html">View Clove mockup →</a>
+          </div>
+
+          <div class="mockup-card">
+            <div class="mockup-tag">Backup · the personal option</div>
+            <h3>Jenani — the solo-practitioner template</h3>
+            <p class="mockup-why">First-person voice built in ("About me", "My services"). Has an expand/collapse FAQ block — a SOW requirement we'd otherwise have to build from scratch. The quietest, most personal of the three.</p>
+            <p class="mockup-traits">Best for: solo voice · built-in FAQ · first-person warmth</p>
+            <a class="mockup-link" href="../mockups/jenani/index.html">View Jenani mockup →</a>
+          </div>
+
+          <div class="mockup-card">
+            <div class="mockup-tag">Third option · the minimal one</div>
+            <h3>Clune — the minimal editorial template</h3>
+            <p class="mockup-why">The most restrained of the three — generous whitespace, sage-forward palette. Closest to "I just like really beautiful, minimal things." We translate the spa-flavored default copy into clinical warmth; the structure stays.</p>
+            <p class="mockup-traits">Best for: minimal aesthetic · generous whitespace · sage palette</p>
+            <a class="mockup-link" href="../mockups/clune/index.html">View Clune mockup →</a>
+          </div>
+        </div>
+
+        <div class="recap-callout" style="margin-top: 32px;">
+          <p><strong>How to pick:</strong> Open all three, scroll through each one. You don't have to pick the "best" one — pick the one that feels closest to how you want a potential client to feel when they land on your site. You can also tell me "I like the header from Clove and the FAQ from Jenani" — we mix and match.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="container">
+        <div class="section-label">Part 4</div>
+        <h2>What happens next</h2>
+        <p>Phase 1 runs through late August, with a pause while WFC is in Japan. Here's the sequence.</p>
+
+        <table class="timeline">
+          <thead>
+            <tr><th>When</th><th>What</th><th>Who</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>This week</td><td>You pick a template direction</td><td>Susan</td></tr>
+            <tr><td>This week</td><td>Discovery session with Lauren (30 min)</td><td>Lauren + Susan</td></tr>
+            <tr><td>By Fri 7/18</td><td>Quick wins: color, contrast, header fixes</td><td>Frank + Lauren</td></tr>
+            <tr><td>By Fri 7/18</td><td>HIPAA-aware communications notice draft</td><td>Lauren writes, Susan reviews</td></tr>
+            <tr><td>Jul 22 – Aug 2</td><td>WFC in Japan — work pauses</td><td>—</td></tr>
+            <tr><td>Aug 3 onward</td><td>Template config + Specialties page rebuild</td><td>Frank + Lauren</td></tr>
+            <tr><td>Week of Aug 11</td><td>Content + FAQ + knowledge scaffold</td><td>Frank + Lauren</td></tr>
+            <tr><td>Week of Aug 18</td><td>On-page SEO + WCAG AA pass + preview link</td><td>Frank + Lauren</td></tr>
+            <tr><td>~Aug 22</td><td>Phase 1 wrap</td><td>Frank + Lauren</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="todos">
+      <div class="container">
+        <div class="section-label">Part 5</div>
+        <h2>Your to-dos this week</h2>
+        <p>Nothing urgent. These help us move faster once we're back from Japan.</p>
+
+        <ul class="todo-list">
+          <li>Open the three template mockups above and pick a direction (or tell me what you like from each).</li>
+          <li>Pick a Discovery session slot from Lauren's scheduling link (separate email from her).</li>
+          <li>DIY a new professional headshot — iPhone + your daughter is perfect.</li>
+          <li>Gather any site-relevant photos (office, or specialty-relevant imagery).</li>
+          <li>Confirm whether 2FA is enabled on Squarespace — lock it down if not.</li>
+          <li>Review Lauren's HIPAA-aware communications notice draft when it lands Friday.</li>
+        </ul>
+
+        <div class="recap-callout" style="margin-top: 32px;">
+          <p>Reply to this email with any questions, and pick a Discovery slot from Lauren's email when it lands. That's it — no pressure to do anything else this week.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="contact-block">
+        <h4>Frank Lucido</h4>
+        <p>WellFull Collective</p>
+        <p><a href="mailto:frank@wellfullcollective.com">frank@wellfullcollective.com</a> · <a href="mailto:info@wellfullcollective.com">info@wellfullcollective.com</a></p>
+      </div>
+      <div class="hipaa-notice">
+        This site does not provide medical advice and is not a crisis service. Email is not a secure channel; please do not include protected health information in your message. For emergencies, call 988 or 911.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
