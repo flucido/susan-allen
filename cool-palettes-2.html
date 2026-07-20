@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monotone Palette Review — Susan Allen Therapy Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deck-bg:#F0F4F8; --deck-surface:#E2EAF2; --deck-fg:#0F2854;
+  --deck-muted:#4988C4; --deck-border:#CFD9E4; --deck-accent:#1C4D8D;
+  --display:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --body:'Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;font-family:var(--body);color:var(--deck-fg);background:var(--deck-bg)}
+
+/* === Deck frame === */
+.deck{height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative}
+.slides{flex:1;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.slide{min-width:100vw;min-width:100dvw;scroll-snap-align:start;display:flex;flex-direction:column;padding:3.5rem 4rem 2.5rem;position:relative}
+
+/* === Topbar === */
+.topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--deck-border);background:var(--deck-bg);z-index:10}
+.topbar .brand{font-family:var(--display);font-size:1.15rem;font-weight:600;color:var(--deck-fg);letter-spacing:.02em}
+.topbar .brand span{color:var(--deck-muted);font-weight:400}
+.topbar .deck-meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--deck-muted);opacity:.7}
+
+/* === Nav controls === */
+.controls{position:absolute;bottom:1.25rem;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;z-index:10}
+.controls .dots{display:flex;gap:.5rem;align-items:center}
+.controls .dot{width:8px;height:8px;border-radius:50%;background:var(--deck-border);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.controls .dot.active{background:var(--deck-accent);transform:scale(1.25)}
+.controls .dot:hover{background:var(--deck-muted)}
+.controls .arrows{display:flex;gap:.5rem}
+.controls button{width:36px;height:36px;border-radius:50%;border:1px solid var(--deck-border);background:var(--deck-surface);color:var(--deck-fg);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.controls button:hover{background:var(--deck-accent);color:#fff;border-color:var(--deck-accent)}
+.controls button:disabled{opacity:.35;cursor:default}
+.controls button:disabled:hover{background:var(--deck-surface);color:var(--deck-fg);border-color:var(--deck-border)}
+.counter{font-family:var(--mono);font-size:.7rem;color:var(--deck-muted);letter-spacing:.05em}
+
+/* === Cover slide === */
+.slide-cover{justify-content:center;align-items:flex-start;background:var(--deck-surface)}
+.slide-cover .eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--deck-muted);margin-bottom:1.5rem}
+.slide-cover h1{font-family:var(--display);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:500;line-height:1.05;color:var(--deck-fg);margin-bottom:1rem;letter-spacing:-.01em}
+.slide-cover .sub{font-size:1.15rem;color:var(--deck-muted);max-width:520px;line-height:1.5;margin-bottom:2.5rem}
+.slide-cover .meta{display:flex;gap:2rem;font-family:var(--mono);font-size:.75rem;color:var(--deck-fg)}
+.slide-cover .meta div{display:flex;flex-direction:column;gap:.2rem}
+.slide-cover .meta .label{color:var(--deck-muted);text-transform:uppercase;letter-spacing:.08em;font-size:.65rem}
+.slide-cover .meta .val{font-weight:500}
+
+/* === Intro / process slide === */
+.slide-intro{padding-top:5rem}
+.slide-intro h2{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.1;letter-spacing:-.01em;margin-bottom:.5rem}
+.slide-intro .lead{font-size:1rem;color:var(--deck-muted);line-height:1.5;max-width:620px;margin-bottom:2rem}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;flex:1;align-content:center;max-width:760px}
+.step{display:flex;flex-direction:column;gap:.5rem;padding:1.25rem 1.5rem;border-radius:var(--radius);background:var(--deck-surface);border:1px solid var(--deck-border)}
+.step .step-num{font-family:var(--mono);font-size:.65rem;color:var(--deck-accent);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.step .step-title{font-family:var(--display);font-size:1.2rem;font-weight:500;line-height:1.2;color:var(--deck-fg)}
+.step .step-body{font-size:.85rem;line-height:1.4;color:var(--deck-muted)}
+
+/* === Palette slide layout === */
+.slide-palette{padding-top:5rem}
+.slide-palette .slide-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:.5rem}
+.slide-palette .slide-num{font-family:var(--mono);font-size:.75rem;color:var(--deck-muted);letter-spacing:.08em}
+.slide-palette h2{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.1;letter-spacing:-.01em}
+.slide-palette .source{font-family:var(--mono);font-size:.7rem;color:var(--deck-muted);margin-bottom:.25rem;letter-spacing:.03em}
+.slide-palette .posture{font-family:var(--display);font-size:1.3rem;font-style:italic;color:var(--deck-fg);margin-bottom:1.75rem;max-width:680px;line-height:1.4;opacity:.85}
+
+/* swatches row */
+.swatches{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.swatch .chip{width:72px;height:72px;border-radius:12px;border:1px solid rgba(0,0,0,.08);position:relative}
+.swatch .label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;color:var(--deck-muted)}
+.swatch .hex{font-family:var(--mono);font-size:.65rem;color:var(--deck-fg);font-weight:500}
+
+/* mock application */
+.mock{flex:1;display:grid;grid-template-columns:1.2fr 1fr;gap:1.5rem;align-items:stretch;max-height:calc(100vh - 20rem)}
+.mock-nav{border-radius:var(--radius) var(--radius) 0 0;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;font-size:.8rem}
+.mock-nav .logo{font-family:var(--display);font-weight:600;font-size:1rem}
+.mock-nav ul{display:flex;gap:1.25rem;list-style:none;font-size:.75rem}
+.mock-nav ul li{opacity:.7}
+.mock-nav .cta-mini{font-family:var(--mono);font-size:.65rem;padding:.35rem .8rem;border-radius:6px;border:1px solid currentColor;opacity:.85}
+.mock-hero{padding:2rem 1.75rem;border-radius:0 0 var(--radius) var(--radius);display:flex;flex-direction:column;justify-content:center;gap:.75rem;min-height:180px}
+.mock-hero h3{font-family:var(--display);font-size:2rem;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+.mock-hero p{font-size:.9rem;line-height:1.45;max-width:340px;opacity:.75}
+.mock-hero .btn{display:inline-block;width:fit-content;padding:.6rem 1.5rem;border-radius:8px;font-size:.8rem;font-weight:500;margin-top:.5rem}
+.mock-side{display:flex;flex-direction:column;gap:1rem}
+.mock-card{padding:1.25rem;border-radius:var(--radius);display:flex;flex-direction:column;gap:.5rem}
+.mock-card .card-label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em}
+.mock-card .card-title{font-family:var(--display);font-size:1.25rem;font-weight:500;line-height:1.2}
+.mock-card .card-body{font-size:.8rem;line-height:1.4;opacity:.7}
+.mock-quote{padding:1.25rem;border-radius:var(--radius);font-family:var(--display);font-size:1.15rem;font-style:italic;line-height:1.4}
+
+/* comparison slide */
+.slide-compare{padding-top:5rem}
+.slide-compare h2{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;margin-bottom:.5rem}
+.slide-compare .sub{color:var(--deck-muted);margin-bottom:2rem;font-size:.95rem}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;flex:1;align-content:center}
+.compare-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--deck-border);display:flex;flex-direction:column}
+.compare-card .top-bar{height:10px}
+.compare-card .body{padding:1.25rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.compare-card .num{font-family:var(--mono);font-size:.65rem;color:var(--deck-muted);letter-spacing:.08em}
+.compare-card .name{font-family:var(--display);font-size:1.1rem;font-weight:500;line-height:1.15}
+.compare-card .posture-mini{font-size:.78rem;line-height:1.35;opacity:.7;margin-top:auto}
+.compare-card .mini-swatches{display:flex;gap:.25rem;margin-top:.5rem}
+.compare-card .mini-swatches .ms{width:24px;height:24px;border-radius:5px;border:1px solid rgba(0,0,0,.06)}
+
+/* decision slide */
+.slide-decision{justify-content:center;align-items:flex-start}
+.slide-decision h2{font-family:var(--display);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:500;margin-bottom:1rem;letter-spacing:-.01em}
+.slide-decision .lead{font-size:1.05rem;color:var(--deck-muted);max-width:560px;line-height:1.5;margin-bottom:2rem}
+.slide-decision .options{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:620px;margin-bottom:2rem}
+.slide-decision .opt{padding:1rem 1.25rem;border-radius:var(--radius);border:1px solid var(--deck-border);display:flex;flex-direction:column;gap:.25rem}
+.slide-decision .opt .opt-label{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--deck-muted)}
+.slide-decision .opt .opt-text{font-family:var(--display);font-size:1.1rem;font-weight:500;color:var(--deck-fg)}
+.slide-decision .lock-note{font-family:var(--mono);font-size:.7rem;color:var(--deck-muted);line-height:1.5;max-width:520px}
+
+@media (max-width:920px){
+  .slide{padding:3rem 1.5rem 2rem}
+  .mock{grid-template-columns:1fr;gap:1rem}
+  .compare-grid{grid-template-columns:repeat(2,1fr)}
+  .slide-decision .options{grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .slides{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="brand">Susan Allen <span>· Monotone Palette Review</span></div>
+  <div class="deck-meta">Design Direction · Round 2 · v2 Monotone</div>
+</div>
+
+<div class="slides" id="slides">
+
+<!-- ============ SLIDE 1: COVER ============ -->
+<section class="slide slide-cover" data-od-id="cover">
+  <div class="eyebrow">Design Direction · Round 2 · Version 2</div>
+  <h1>Monotone Palette Review</h1>
+  <p class="sub">Six cool-hued monotone color systems for the Susan Allen therapy site — each a single cool hue family with one deliberate pop of color as the accent.</p>
+  <div class="meta">
+    <div><span class="label">Client</span><span class="val">Susan Allen, LMFT</span></div>
+    <div><span class="label">Prepared by</span><span class="val">Wellfull Collective</span></div>
+    <div><span class="label">Date</span><span class="val">July 2026</span></div>
+    <div><span class="label">Palettes</span><span class="val">6 monotone variants</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2: INTRO / PROCESS ============ -->
+<section class="slide slide-intro" data-od-id="intro">
+  <h2 style="color:var(--deck-fg)">How this works</h2>
+  <p class="lead">Six cool-monotone color systems, each mapped to the same six-token structure so they compare apples-to-apples. Every palette holds a single cool hue family across bg, surface, fg, muted, and border — then breaks the monotone with one saturated pop as the accent. This is round one — directional, not binding. Swipe through to see how each palette feels applied to real site elements, then tell us what resonates and what to explore further in the next round.</p>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">Step 01</span>
+      <span class="step-title">Review each palette</span>
+      <span class="step-body">Six slides, each with token swatches and a mock application — nav, hero, card, and pull quote rendered in that palette's actual colors. Watch how the accent pop reads against the cool-monotone base.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">Step 02</span>
+      <span class="step-title">Compare side-by-side</span>
+      <span class="step-body">A single grid puts all six accent bars and mini-swatches next to each other for quick visual scanning of the cool families and pop colors.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">Step 03</span>
+      <span class="step-title">Share your reactions</span>
+      <span class="step-body">Tell us what feels right, what feels off, and what you'd like to see more of. Blend suggestions welcome — e.g. "B's monotone base with D's pop color."</span>
+    </div>
+    <div class="step">
+      <span class="step-num">Step 04</span>
+      <span class="step-title">Iterate, then converge</span>
+      <span class="step-body">We'll refine based on your feedback and tighten the options over the next round. Nothing here is locked — typography (Cormorant Garamond + Atkinson Hyperlegible) is held constant across variants only so the comparison is fair, not because it's final.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3: Variant A — Slate Monotone + Cobalt Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-a" style="background:#F1F3F6">
+  <div class="slide-head"><span class="slide-num">01 / 06</span></div>
+  <h2 style="color:#1E2A3A">Slate Monotone + Cobalt Pop</h2>
+
+  <p class="posture" style="color:#1E2A3A">Cool slate-grays across the board, broken by a single electric cobalt accent. Quiet, professional, with a confident pop.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#F1F3F6"></div><span class="label">bg</span><span class="hex">#F1F3F6</span></div>
+    <div class="swatch"><div class="chip" style="background:#E4E8EE"></div><span class="label">surface</span><span class="hex">#E4E8EE</span></div>
+    <div class="swatch"><div class="chip" style="background:#1E2A3A"></div><span class="label">fg</span><span class="hex">#1E2A3A</span></div>
+    <div class="swatch"><div class="chip" style="background:#6B7A8F"></div><span class="label">muted</span><span class="hex">#6B7A8F</span></div>
+    <div class="swatch"><div class="chip" style="background:#D2D8E2"></div><span class="label">border</span><span class="hex">#D2D8E2</span></div>
+    <div class="swatch"><div class="chip" style="background:#2952CC"></div><span class="label">accent</span><span class="hex">#2952CC</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E4E8EE;color:#1E2A3A;border:1px solid #D2D8E2">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#2952CC;color:#F1F3F6">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#F1F3F6;color:#1E2A3A">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E4E8EE;color:#1E2A3A;border:1px solid #D2D8E2">
+        <span class="card-label" style="color:#2952CC">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#2952CC;color:#F1F3F6">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4: Variant B — Mist Gray + Teal Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-b" style="background:#F2F4F5">
+  <div class="slide-head"><span class="slide-num">02 / 06</span></div>
+  <h2 style="color:#202830">Mist Gray + Teal Pop</h2>
+
+  <p class="posture" style="color:#202830">Cool blue-gray monotone with a saturated teal accent. The calmest base of the six — the teal carries all the energy.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#F2F4F5"></div><span class="label">bg</span><span class="hex">#F2F4F5</span></div>
+    <div class="swatch"><div class="chip" style="background:#E5E9EC"></div><span class="label">surface</span><span class="hex">#E5E9EC</span></div>
+    <div class="swatch"><div class="chip" style="background:#202830"></div><span class="label">fg</span><span class="hex">#202830</span></div>
+    <div class="swatch"><div class="chip" style="background:#6E7B85"></div><span class="label">muted</span><span class="hex">#6E7B85</span></div>
+    <div class="swatch"><div class="chip" style="background:#D4DAE0"></div><span class="label">border</span><span class="hex">#D4DAE0</span></div>
+    <div class="swatch"><div class="chip" style="background:#14838F"></div><span class="label">accent</span><span class="hex">#14838F</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E5E9EC;color:#202830;border:1px solid #D4DAE0">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#14838F;color:#F2F4F5">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#F2F4F5;color:#202830">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E5E9EC;color:#202830;border:1px solid #D4DAE0">
+        <span class="card-label" style="color:#14838F">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#14838F;color:#F2F4F5">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5: Variant C — Indigo Shade + Coral Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-c" style="background:#F0F1F6">
+  <div class="slide-head"><span class="slide-num">03 / 06</span></div>
+  <h2 style="color:#1F2540">Indigo Shade + Coral Pop</h2>
+
+  <p class="posture" style="color:#1F2540">Cool indigo-violet monotone broken by a warm coral accent — the only warm pop in the set. Contemplative base, human warmth on top.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#F0F1F6"></div><span class="label">bg</span><span class="hex">#F0F1F6</span></div>
+    <div class="swatch"><div class="chip" style="background:#E2E5EF"></div><span class="label">surface</span><span class="hex">#E2E5EF</span></div>
+    <div class="swatch"><div class="chip" style="background:#1F2540"></div><span class="label">fg</span><span class="hex">#1F2540</span></div>
+    <div class="swatch"><div class="chip" style="background:#6B72A0"></div><span class="label">muted</span><span class="hex">#6B72A0</span></div>
+    <div class="swatch"><div class="chip" style="background:#D2D6E6"></div><span class="label">border</span><span class="hex">#D2D6E6</span></div>
+    <div class="swatch"><div class="chip" style="background:#E8675A"></div><span class="label">accent</span><span class="hex">#E8675A</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E2E5EF;color:#1F2540;border:1px solid #D2D6E6">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#E8675A;color:#F0F1F6">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#F0F1F6;color:#1F2540">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E2E5EF;color:#1F2540;border:1px solid #D2D6E6">
+        <span class="card-label" style="color:#E8675A">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#E8675A;color:#F0F1F6">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6: Variant D — Sage Gray + Amber Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-d" style="background:#EFF1EE">
+  <div class="slide-head"><span class="slide-num">04 / 06</span></div>
+  <h2 style="color:#1F2A24">Sage Gray + Amber Pop</h2>
+
+  <p class="posture" style="color:#1F2A24">Cool green-gray monotone with a warm amber accent. Botanical quiet, grounded — the pop reads like late-afternoon light.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#EFF1EE"></div><span class="label">bg</span><span class="hex">#EFF1EE</span></div>
+    <div class="swatch"><div class="chip" style="background:#E2E6E1"></div><span class="label">surface</span><span class="hex">#E2E6E1</span></div>
+    <div class="swatch"><div class="chip" style="background:#1F2A24"></div><span class="label">fg</span><span class="hex">#1F2A24</span></div>
+    <div class="swatch"><div class="chip" style="background:#6A7A70"></div><span class="label">muted</span><span class="hex">#6A7A70</span></div>
+    <div class="swatch"><div class="chip" style="background:#D2D8CE"></div><span class="label">border</span><span class="hex">#D2D8CE</span></div>
+    <div class="swatch"><div class="chip" style="background:#C8884A"></div><span class="label">accent</span><span class="hex">#C8884A</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E2E6E1;color:#1F2A24;border:1px solid #D2D8CE">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#C8884A;color:#EFF1EE">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#EFF1EE;color:#1F2A24">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E2E6E1;color:#1F2A24;border:1px solid #D2D8CE">
+        <span class="card-label" style="color:#C8884A">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#C8884A;color:#EFF1EE">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7: Variant E — Violet Mute + Mint Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-e" style="background:#F3F1F6">
+  <div class="slide-head"><span class="slide-num">05 / 06</span></div>
+  <h2 style="color:#2A2240">Violet Mute + Mint Pop</h2>
+
+  <p class="posture" style="color:#2A2240">Muted violet-gray monotone with a fresh mint accent. The most contemplative base — the mint is the exhale.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#F3F1F6"></div><span class="label">bg</span><span class="hex">#F3F1F6</span></div>
+    <div class="swatch"><div class="chip" style="background:#E6E2EE"></div><span class="label">surface</span><span class="hex">#E6E2EE</span></div>
+    <div class="swatch"><div class="chip" style="background:#2A2240"></div><span class="label">fg</span><span class="hex">#2A2240</span></div>
+    <div class="swatch"><div class="chip" style="background:#7A70A0"></div><span class="label">muted</span><span class="hex">#7A70A0</span></div>
+    <div class="swatch"><div class="chip" style="background:#D8D2E4"></div><span class="label">border</span><span class="hex">#D8D2E4</span></div>
+    <div class="swatch"><div class="chip" style="background:#4FCFA8"></div><span class="label">accent</span><span class="hex">#4FCFA8</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E6E2EE;color:#2A2240;border:1px solid #D8D2E4">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#4FCFA8;color:#2A2240">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#2A2240;color:#F3F1F6">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E6E2EE;color:#2A2240;border:1px solid #D8D2E4">
+        <span class="card-label" style="color:#4FCFA8">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#4FCFA8;color:#2A2240">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8: Variant F — Steel Blue + Rose Pop ============ -->
+<section class="slide slide-palette" data-od-id="variant-f" style="background:#EFF2F5">
+  <div class="slide-head"><span class="slide-num">06 / 06</span></div>
+  <h2 style="color:#1F2A35">Steel Blue + Rose Pop</h2>
+
+  <p class="posture" style="color:#1F2A35">Cool steel-blue monotone with a rose-pink accent. Clinical trust in the base, gentle warmth in the pop — the most "therapist's office" of the six.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#EFF2F5"></div><span class="label">bg</span><span class="hex">#EFF2F5</span></div>
+    <div class="swatch"><div class="chip" style="background:#E2E7EC"></div><span class="label">surface</span><span class="hex">#E2E7EC</span></div>
+    <div class="swatch"><div class="chip" style="background:#1F2A35"></div><span class="label">fg</span><span class="hex">#1F2A35</span></div>
+    <div class="swatch"><div class="chip" style="background:#6A7A8A"></div><span class="label">muted</span><span class="hex">#6A7A8A</span></div>
+    <div class="swatch"><div class="chip" style="background:#D2DAE2"></div><span class="label">border</span><span class="hex">#D2DAE2</span></div>
+    <div class="swatch"><div class="chip" style="background:#D45F7A"></div><span class="label">accent</span><span class="hex">#D45F7A</span></div>
+  </div>
+  <div class="mock">
+    <div style="display:flex;flex-direction:column">
+      <div class="mock-nav" style="background:#E2E7EC;color:#1F2A35;border:1px solid #D2DAE2">
+        <span class="logo">Susan Allen, LMFT</span>
+        <ul><li>Home</li><li>About</li><li>Specialties</li><li>FAQ</li></ul>
+        <span class="cta-mini">Contact</span>
+      </div>
+      <div class="mock-hero" style="background:#D45F7A;color:#EFF2F5">
+        <h3>Compassionate therapy for reproductive &amp; perinatal mental health</h3>
+        <p>Mindfulness-based CBT, psychodynamic, and interpersonal approaches — telehealth across California.</p>
+        <span class="btn" style="background:#EFF2F5;color:#1F2A35">Email Susan</span>
+      </div>
+    </div>
+    <div class="mock-side">
+      <div class="mock-card" style="background:#E2E7EC;color:#1F2A35;border:1px solid #D2DAE2">
+        <span class="card-label" style="color:#D45F7A">Specialty</span>
+        <span class="card-title">Perinatal Mental Health</span>
+        <span class="card-body">Support through pregnancy, postpartum, and early parenting transitions.</span>
+      </div>
+      <div class="mock-quote" style="background:#D45F7A;color:#EFF2F5">"You don't have to hold this alone."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9: Comparison ============ -->
+<section class="slide slide-compare" data-od-id="comparison">
+  <h2 style="color:var(--deck-fg)">Side-by-side</h2>
+  <p class="sub">All six monotone bases with their pop accents at a glance — a starting set to react to, not a shortlist to choose from.</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="top-bar" style="background:#2952CC"></div>
+      <div class="body">
+        <span class="num">01</span>
+        <span class="name">Slate Monotone + Cobalt Pop</span>
+        <span class="posture-mini">Quiet, professional, with a confident pop.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#F1F3F6"></div><div class="ms" style="background:#1E2A3A"></div><div class="ms" style="background:#6B7A8F"></div><div class="ms" style="background:#2952CC"></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="top-bar" style="background:#14838F"></div>
+      <div class="body">
+        <span class="num">02</span>
+        <span class="name">Mist Gray + Teal Pop</span>
+        <span class="posture-mini">Calmest base — teal carries all the energy.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#F2F4F5"></div><div class="ms" style="background:#202830"></div><div class="ms" style="background:#6E7B85"></div><div class="ms" style="background:#14838F"></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="top-bar" style="background:#E8675A"></div>
+      <div class="body">
+        <span class="num">03</span>
+        <span class="name">Indigo Shade + Coral Pop</span>
+        <span class="posture-mini">Contemplative base, human warmth on top.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#F0F1F6"></div><div class="ms" style="background:#1F2540"></div><div class="ms" style="background:#6B72A0"></div><div class="ms" style="background:#E8675A"></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="top-bar" style="background:#C8884A"></div>
+      <div class="body">
+        <span class="num">04</span>
+        <span class="name">Sage Gray + Amber Pop</span>
+        <span class="posture-mini">Botanical quiet — pop reads like late-afternoon light.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#EFF1EE"></div><div class="ms" style="background:#1F2A24"></div><div class="ms" style="background:#6A7A70"></div><div class="ms" style="background:#C8884A"></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="top-bar" style="background:#4FCFA8"></div>
+      <div class="body">
+        <span class="num">05</span>
+        <span class="name">Violet Mute + Mint Pop</span>
+        <span class="posture-mini">Most contemplative base — mint is the exhale.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#F3F1F6"></div><div class="ms" style="background:#2A2240"></div><div class="ms" style="background:#7A70A0"></div><div class="ms" style="background:#4FCFA8"></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="top-bar" style="background:#D45F7A"></div>
+      <div class="body">
+        <span class="num">06</span>
+        <span class="name">Steel Blue + Rose Pop</span>
+        <span class="posture-mini">Clinical trust + gentle warmth — the office feel.</span>
+        <div class="mini-swatches">
+          <div class="ms" style="background:#EFF2F5"></div><div class="ms" style="background:#1F2A35"></div><div class="ms" style="background:#6A7A8A"></div><div class="ms" style="background:#D45F7A"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10: Decision ============ -->
+<section class="slide slide-decision" data-od-id="decision">
+  <h2 style="color:var(--deck-fg)">Which direction feels right?</h2>
+  <p class="lead">This is round one — directional, not final. Tell us what resonates and what to push further. Options below are conversation starters, not commitments. Nothing locks until we've iterated and you're confident.</p>
+  <div class="options">
+    <div class="opt"><span class="opt-label">Option 1</span><span class="opt-text">A direction feels close — let's refine it</span></div>
+    <div class="opt"><span class="opt-label">Option 2</span><span class="opt-text">Blend elements — specify which</span></div>
+    <div class="opt"><span class="opt-label">Option 3</span><span class="opt-text">Narrow to top 2, I'll mock both next round</span></div>
+    <div class="opt"><span class="opt-label">Option 4</span><span class="opt-text">None yet — pull more options in round 3</span></div>
+  </div>
+  <p class="lock-note">Nothing here is binding. These six monotone palettes are starting points for a conversation — your reactions guide the next iteration. The six-token structure (bg, surface, fg, muted, border, accent) is just a shared vocabulary for comparing options fairly. Typography (Cormorant Garamond + Atkinson Hyperlegible) is held constant across variants so you can judge color alone — it can still evolve.</p>
+</section>
+
+</div><!-- /slides -->
+
+<!-- Controls -->
+<div class="controls">
+  <div class="arrows">
+    <button id="prev" aria-label="Previous slide">‹</button>
+    <button id="next" aria-label="Next slide">›</button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">1 / 10</div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+(function(){
+  const slides=document.getElementById('slides');
+  const dotsContainer=document.getElementById('dots');
+  const counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev');
+  const nextBtn=document.getElementById('next');
+  const allSlides=[...slides.querySelectorAll('.slide')];
+  const total=allSlides.length;
+  let current=0;
+
+  // restore position
+  try{
+    const saved=parseInt(localStorage.getItem('cool-palettes-monotone-pos')||'0',10);
+    if(saved>0&&saved<total){slides.scrollTo({left:saved*slides.clientWidth,behavior:'auto'});current=saved}
+  }catch(e){}
+
+  // build dots
+  allSlides.forEach((s,i)=>{
+    const dot=document.createElement('button');
+    dot.className='dot'+(i===current?' active':'');
+    dot.setAttribute('aria-label','Go to slide '+(i+1));
+    dot.addEventListener('click',()=>goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function update(){
+    dotsContainer.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+    counter.textContent=(current+1)+' / '+total;
+    prevBtn.disabled=current===0;
+    nextBtn.disabled=current===total-1;
+    try{localStorage.setItem('cool-palettes-monotone-pos',String(current))}catch(e){}
+  }
+
+  function goTo(i){current=Math.max(0,Math.min(total-1,i));slides.scrollTo({left:current*slides.clientWidth,behavior:'smooth'});update()}
+
+  prevBtn.addEventListener('click',()=>goTo(current-1));
+  nextBtn.addEventListener('click',()=>goTo(current+1));
+
+  // track scroll position
+  let scrollTimer;
+  slides.addEventListener('scroll',()=>{
+    clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(()=>{
+      const idx=Math.round(slides.scrollLeft/slides.clientWidth);
+      if(idx!==current){current=idx;update()}
+    },100);
+  });
+
+  // keyboard
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft'){goTo(current-1)}
+    if(e.key==='ArrowRight'){goTo(current+1)}
+  });
+
+  update();
+})();
+</script>
+
+<script type="application/json" id="speaker-notes">
+[]
+</script>
+</body>
+</html>
